@@ -7,19 +7,17 @@ using UnityEngine.UI;
 public class WordPerMinutes : MonoBehaviour
 {
     [SerializeField] InputField Input;
+    [SerializeField] GameObject Graph;
     Text text;
+    Graphic _graphic;
 
     int CharacterCount;
-    float WordPerMinute;
+    int WordPerMinute;
     // Start is called before the first frame update
     void Start()
     {
         text = GetComponent<Text>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        _graphic = Graph.GetComponent<Graphic>();
     }
 
     public void NewMinute()
@@ -27,6 +25,7 @@ public class WordPerMinutes : MonoBehaviour
         WordPerMinute = CharacterCount / 5;
         text.text = $"WPM : {WordPerMinute}";
         CharacterCount = 0;
+        _graphic.CreateNewPoint(WordPerMinute);
     }
 
     public void NewCharacter()

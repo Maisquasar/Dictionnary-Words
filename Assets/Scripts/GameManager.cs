@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [Header("Inputs")]
     [SerializeField] InputField InputField;
     [SerializeField] InputField GoToInput;
+    [SerializeField] GameObject Graph;
 
     private string currentWord;
     private int currentId = -1;
@@ -45,6 +46,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         WordCountText.text = $"{currentId}/{WordsDatas.wordsDatas.Count}";
+        if (Input.GetKeyUp(KeyCode.Home))
+        {
+            Graph.SetActive(!Graph.activeSelf);
+        }
     }
 
     public void NewWord()
@@ -57,7 +62,6 @@ public class GameManager : MonoBehaviour
         string Url = $"https://www.google.com/search?q={currentWord}";
         Application.OpenURL(Url);
     }
-
 
     public void Check()
     {
@@ -174,7 +178,7 @@ public class GameManager : MonoBehaviour
         OtherWordsTexts.Add(Instantiate(CurrentWordText, CurrentWordText.transform.parent));
         OtherWordsTexts.Last().transform.parent = CurrentWordText.gameObject.transform.parent;
         OtherWordsTexts.Last().transform.position = (Vector2)CurrentWordText.gameObject.transform.position + offset;
-        OtherWordsTexts.Last().transform.position = new Vector3(OtherWordsTexts.Last().transform.position.x, OtherWordsTexts.Last().transform.position.y, 0); 
+        OtherWordsTexts.Last().transform.position = new Vector3(OtherWordsTexts.Last().transform.position.x, OtherWordsTexts.Last().transform.position.y, 0);
         OtherWordsTexts.Last().color = CurrentWordText.color - new Color(0, 0, 0, alpha);
     }
 
